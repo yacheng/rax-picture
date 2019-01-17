@@ -8,4 +8,4 @@ if (isWeb) {
 }
 
 export default Picture;
-module.exports = exports["default"];
+module.exports = exports.default;
