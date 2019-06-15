@@ -98,17 +98,17 @@ export default function(uri, config) {
 
         if (isOSSImg) {
           newUrl += prev +
-          scalingSuffix +
-          cut +
-          _compressSuffix +
-          webpSuffix;
+            scalingSuffix +
+            cut +
+            _compressSuffix +
+            webpSuffix;
         } else {
           newUrl += prev +
-          scalingSuffix +
-          cut +
-          _compressSuffix +
-          suffix +
-          webpSuffix;
+            scalingSuffix +
+            cut +
+            _compressSuffix +
+            suffix +
+            webpSuffix;
         }
 
 
