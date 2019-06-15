@@ -11,7 +11,7 @@
     "start": "rax-scripts start --type 'component' -p 8000",
     "prepublishOnly": "npm run build",
     "test": "rax-scripts jest",
-    "lint": "eslint --ext .js --ext .jsx ./src"
+    "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ./src"
   },
   "files": [
     "dist",
