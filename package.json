@@ -32,6 +32,9 @@
   "engines": {
     "npm": ">=3.0.0"
   },
+  "miniappConfig": {
+    "main": "lib/miniapp/index"
+  },
   "dependencies": {
     "rax-image": "1.0.1-beta.0",
     "rax-view": "1.0.1-beta.2",
