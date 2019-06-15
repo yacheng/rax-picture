@@ -38,7 +38,7 @@
     "universal-env": "^0.6.6"
   },
   "peerDependencies": {
-    "rax": "0.x"
+    "rax": "^1.0.0"
   },
   "devDependencies": {
     "@rax-types/rax": "^1.0.5",
