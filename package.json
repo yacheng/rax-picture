@@ -9,6 +9,7 @@
     "clean": "rm -rf ./lib && rm -rf ./package-lock.json",
     "build": "npm run clean && rax-scripts build --type 'component'",
     "start": "rax-scripts start --type 'component' -p 8000",
+    "miniapp":"rax-scripts start --type 'component-miniapp'",
     "prepublishOnly": "npm run build",
     "test": "rax-scripts jest",
     "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ./src"
