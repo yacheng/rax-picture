@@ -1,6 +1,4 @@
-
-import * as Rax from "rax";
-import { FunctionComponent } from 'rax';
+import * as Rax from 'rax';
 
 /**
  * component:picture(图片)
@@ -151,6 +149,6 @@ export interface PictureProps extends Rax.Attributes {
 }
 
 
-declare interface Picture extends FunctionComponent<PictureProps> {}
+declare interface Picture extends Rax.FunctionComponent<PictureProps> {}
 
 export default Picture;
