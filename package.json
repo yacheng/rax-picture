@@ -1,6 +1,6 @@
 {
   "name": "rax-picture",
-  "version": "1.0.1-beta.1",
+  "version": "1.0.1",
   "description": "Picture component for Rax.",
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
@@ -12,7 +12,7 @@
     "miniapp":"rax-scripts start --type 'component-miniapp'",
     "prepublishOnly": "npm run build",
     "test": "npm run build && rax-scripts test",
-    "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ./src"
+    "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ./src --fix"
   },
   "files": [
     "dist",
@@ -37,9 +37,9 @@
     "main": "lib/miniapp/index"
   },
   "dependencies": {
-    "rax-image": "1.0.1-beta.0",
-    "rax-view": "1.0.1-beta.2",
-    "universal-env": "^0.6.6"
+    "rax-image": "^1.0.3",
+    "rax-view": "^1.0.1",
+    "universal-env": "^1.0.0"
   },
   "peerDependencies": {
     "rax": "^1.0.0"
@@ -51,8 +51,7 @@
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "csstype": "^2.6.4",
-    "driver-dom": "^1.0.0",
-    "driver-weex": "^1.0.0",
+    "driver-universal": "^1.0.0",
     "eslint": "^5.16.0",
     "eslint-config-rax": "^0.0.0",
     "rax": "^1.0.0",
