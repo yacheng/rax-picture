@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "miniapp Rax Picture demo",
+  "usingComponents": {
+    "rax-picture": "../../src/miniapp/index"
+  }
+}

@@ -19,7 +19,7 @@ if (!isWeex) {
 }
 
 function isSupportTest(callback, type) {
-  if ('function' != typeof callback) return;
+  if ('function' !== typeof callback) return;
   let img = new Image;
   img.onload = function() {
     let is = img.width > 0 && img.height > 0;
@@ -32,7 +32,7 @@ function isSupportTest(callback, type) {
 }
 
 function setLocalStorage(isSupport, type) {
-  if (window.localStorage && typeof window.localStorage.setItem == 'function') {
+  if (window.localStorage && typeof window.localStorage.setItem === 'function') {
     try {
       window.localStorage.setItem('webpsupport-' + type, isSupport);
     } catch (e) {
@@ -44,7 +44,7 @@ function isSupport(callback, type) {
   if (isWeex) {
     return callback(true);
   }
-  if ('function' == typeof callback) {
+  if ('function' === typeof callback) {
     type = type || 'lossy';
 
     if (window.navigator.userAgent.match(/windows|win32/i) || isIOS && window.navigator.userAgent.match(/UCBrowser/i)) {

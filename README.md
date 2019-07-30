@@ -2,89 +2,84 @@
 
 [![npm](https://img.shields.io/npm/v/rax-picture.svg)](https://www.npmjs.com/package/rax-picture)
 
+**描述：**
 Complex image component
 
-## Install
+## 安装 
 
 ```bash
 $ npm install rax-picture --save
 ```
 
-## Import
+## 引用 
 
 ```jsx
 import Picture from 'rax-picture';
 ```
 
-## Props
+## 属性 
 
-| name      | type       | default  | describe   |
-| :--------------- | :------ | :-------- | :----------------------------- |
-| source           | object  | {uri: ''} | picture source（need）                 |
-| style            | object  |           | must set style.width ，style.height ，（need） |
-| resizeMode       | string  | stretch   | How to adjust the size of the picture when the picture size is out of proportion       |
-| forceUpdate      | boolean | false     | Picture is a PureComponent ，It will render when porps.source.uri has change (in shouldComponentUpdate), If you want to ignore shouldComponentUpdate，you need `forceUpdate={true}` |
-| width            | number  |           | picture width (px)        |
-| height           | number  |           | picture height (px)       |
-| lazyload         | boolean | false     | （for web）picture lazyload，useing：` //g.alicdn.com/kg/appear/0.2.2/appear.min.js` |
-| autoPixelRatio   | boolean | true      | （for web）high resolution   |
-| placeholder      | string  |           | （for web）background image for lazyload      |
-| autoRemoveScheme | boolean | true      | （for web) Automatic deletion protocol header    |
+注：
+1、**支持**列表中的 <img alt="browser" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />代表h5 <img alt="weex" src="https://gw.alicdn.com/tfs/TB1jM0ebMaH3KVjSZFjXXcFWpXa-200-200.svg" width="25px" height="25px" />代表weex  <img alt="miniApp" src="https://gw.alicdn.com/tfs/TB1bBpmbRCw3KVjSZFuXXcAOpXa-200-200.svg" width="25px" height="25px" />代表小程序
 
+| **属性**    | **类型**   | **默认值** | ** 必填 ** | **描述**           | ** 支持 ** |
+| ----------- | ---------- | ---------- | ------------ | ------------------ | ------------ |
+| source | `Object: {uri: String}` | - |   true | 设置图片的 uri | ALL |
+| style | `Object: { width: Number height: Number }` | - | true | 图片样式 width和height为必填属性，否则图片无法正常展示，可以补充其他属性| ALL |
+| fallbackSource | `Object: {uri: String}` | - | false | 备用图片的uri（当主图加载失败是加载） | <img alt="browser" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" /> <img alt="weex" src="https://gw.alicdn.com/tfs/TB1jM0ebMaH3KVjSZFjXXcFWpXa-200-200.svg" width="25px" height="25px" /> |
+| forceUpdate | `Boolean` | false | false | Picture 是一个 PureComponent ，它的 shouldComponentUpdate 决定了当且仅当 porps.source.uri 有变化时才会重新 render。如果你想忽略它的 shouldComponentUpdate，则传入 forceUpdate={true} | <img alt="browser" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" /> <img alt="weex" src="https://gw.alicdn.com/tfs/TB1jM0ebMaH3KVjSZFjXXcFWpXa-200-200.svg" width="25px" height="25px" /> |
+| resizeMode | `String： 'contain' 'cover' 'stretch'` | - | false | 决定当组件尺寸和图片尺寸不成比例的时候如何调整图片的大小 | ALL |
+| quality | `String: 'original' 'normal' 'low' 'high' 'auto'` | - | false | 图片质量 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1jM0ebMaH3KVjSZFjXXcFWpXa-200-200.svg" width="25px" height="25px" />|
+| placeholder | `String` | - | false | 占位图的 URL，在图片下载过程中将展示占位图，图片下载完成后将显示source中指定的图片。 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" /> <img alt="weex" src="https://gw.alicdn.com/tfs/TB1jM0ebMaH3KVjSZFjXXcFWpXa-200-200.svg" width="25px" height="25px" />|
+| lazyload | `Boolean` | true | false | web端有效，根据图像是否在可视范围内延迟加载图像，Web 端需引入 `//g.alicdn.com/kg/appear/0.2.2/appear.min.js` 脚本 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| autoPixelRatio | `Boolean` | true | false | web端有效，在高分辨率下使用二倍图 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| autoRemoveScheme | `Boolean` | true | false | web端有效,图像 URL 自动删除协议头 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| autoReplaceDomain | `Boolean` | true | false | web端有效 图像 URL 域名替换成 gw.alicdn.com | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| autoScaling | `Boolean` | true | false | web端有效, 为图像 URL 添加缩放后缀，将会根据 style 内的 width 属性添加缩放后缀 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| autoWebp | `Boolean` | true | false | web端有效，添加 webp 后缀 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| autoCompress | `Boolean` | true | false | web端有效, 添加质量压缩后缀 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| compressSuffix | `Array<string>` | ['q75', 'q50'] | false | web端有效, 图像质量压缩后缀规则 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| highQuality | `Boolean` | true | false | web端有效， 使用高质量的压缩后缀 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| ignoreGif | `Boolean` | true | false | web端有效，所有针对 URL 的优化是否忽略 gif 格式的图像，默认忽略 | <img alt="weex" src="https://gw.alicdn.com/tfs/TB1uYFobGSs3KVjSZPiXXcsiVXa-200-200.svg" width="25px" height="25px" />|
+| onLoad | `Function` | - | false | 图片加载成功的回调函数 | ALL |
+| onError | `Function` | - | false | 图片加载失败的回调函数 | ALL |
 
-** resizeMode value：**
+### onLoad onError 返回
 
-* cover: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding).
-* contain: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).
-* stretch: Scale width and height independently, This may change the aspect ratio of the src.
+当完成图片加载成功/失败时，将分别触发onLoad/onError中的回调函数 function(event) => {}
+weex下（iOS/Android）
+| **成员** | **类型** |** 描述** |
+| --- | --- | --- |
+| success | `boolean` | 标记图片是否成功加载，成功为1/true，失败为0/false |
+| size | `object` |  加载的图片大小对象 |
+| size.naturalWidth | `number` |  图片宽度，如果图片加载失败则为0/-1 |
+| size.naturalHeight | `number` |  图片高度，如果图片加载失败则为0/-1 |
+h5下是web原生的Event事件
+| **成员** | **类型** |** 描述** |
+| --- | --- | --- |
+| target | `Dom` | 图片自身元素 |
+| target.naturalWidth | `number` |  图片宽度 |
+| target.naturalHeight | `number` |  图片高度 |
 
-(must set `style.width` && `style.height`)
-
-## Example
-
-```jsx
-import {createElement, Component, render} from 'rax';
-import ScrollView from 'rax-scrollview';
-import 'rax-components'; // hack for rax-picture@0.2.5
-import Picture from 'rax-picture';
-
-class Demo extends Component {
-  render() {
-    return <ScrollView ref='scroll'>
-       <Picture
-         source={{
-           uri: '//gw.alicdn.com/tfscom/tuitui/TB2jLF1lXXXXXc7XXXXXXXXXXXX_!!0-dgshop.jpg',
-         }}
-         style={{
-           width: 375,
-           height: 252
-         }}
-         lazyload={true}
-         resizeMode="cover"
-       />
-    </ScrollView>;
-  }
-}
-render(<Demo />);
-```
-
-## Local image example
-
-useing image-source-loader in webpack.config.js 
+## 示例
 
 ```jsx 
-import {createElement, Component, render} from 'rax';
-import Image from 'rax-image';
+import { createElement, render } from 'rax';
+import DU from 'driver-universal';
+import Picture from '../src/index';
 
-class App extends Component {
-  render() {
-    return (
-      <Image source={require('./path/to/your/image.png')}
-        resizeMode="cover"
-      />
-    );
-  }
+const App = () => {
+  return (
+    <Picture
+      source={{
+        uri: 'https://gw.alicdn.com/tfs/TB1bBD0zCzqK1RjSZFpXXakSXXa-68-67.png',
+      }}
+      style={{
+        width: 68,
+        height: 68
+      }}
+    />
+  );
 }
-
-render(<App />);
+render(<App />, document.body, { driver: DU });
 ```

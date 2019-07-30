@@ -10,12 +10,10 @@ export default function(compressSuffix, quality, acutance, isOSSImg) {
       compressSuffix = '_' + compressSuffix.split('Q')[1] + 'Q';
     }
     return compressSuffix ? compressSuffix :
-      quality ? '_' + quality : 'Q'
-    ;
+      quality ? '_' + quality : 'Q';
   } else {
     // _Q(q)90 ['Q75', 'Q50']
     return compressSuffix ? compressSuffix :
-      (quality ? 'Q' + quality : '') + (acutance ? 'S' + acutance : '')
-    ;
+      (quality ? 'Q' + quality : '') + (acutance ? 'S' + acutance : '');
   }
 }
