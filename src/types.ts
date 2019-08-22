@@ -21,7 +21,7 @@ import * as Rax from 'rax';
  */
 export type PictureResizeMode = 'cover' | 'contain' | 'stretch';
 
-export interface PictureProps extends Rax.Attributes {
+export interface PictureProps extends Rax.Attributes, Rax.HTMLAttributes<HTMLDivElement> {
 
   /**
    * image source
