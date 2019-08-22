@@ -21,7 +21,7 @@ import * as Rax from 'rax';
  */
 export type PictureResizeMode = 'cover' | 'contain' | 'stretch';
 
-export interface PictureProps extends Rax.Attributes, Rax.HTMLAttributes<HTMLDivElement> {
+export interface PictureProps extends Rax.Attributes {
 
   /**
    * image source
@@ -31,6 +31,8 @@ export interface PictureProps extends Rax.Attributes, Rax.HTMLAttributes<HTMLDiv
     height?: number;
     width?: number;
   };
+
+  className?: string;
 
   /**
    * style, you must set style.width , you don't need to set style.height when the actual width and height of the image
