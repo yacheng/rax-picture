@@ -9,6 +9,7 @@ Component({
     source: {
       uri: ''
     },
+    lazyload: false,
     onClick: function onClick() {}
   },
   didMount: function didMount() {},
