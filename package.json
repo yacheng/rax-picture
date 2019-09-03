@@ -36,7 +36,7 @@
     "main": "lib/miniapp/index"
   },
   "dependencies": {
-    "rax-image": "^1.0.4-beta.4",
+    "rax-image": "^1.1.1",
     "rax-view": "^1.0.1",
     "universal-env": "^1.0.0"
   },

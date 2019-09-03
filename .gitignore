@@ -12,3 +12,4 @@ lib/
 _miniapp
 demo/miniapp/lib
 demo/miniapp/.tea
+demo/miniapp/package.json

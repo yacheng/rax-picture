@@ -1,7 +1,10 @@
-<image style="{{style}}" 
+<rax-image
+    style="{{style}}" 
     class="{{className}}"
-    src="{{source.uri}}"
-    onTap="onClick"
-    mode="aspectFit"
-    lazy-load="{{lazyload}}"
+    source="{{source}}"
+    onClick="{{onClick}}"
+    onError="{{onError}}"
+    onLoad="{{onLoad}}"
+    resizeMode="{{resizeMode}}"
+    lazyLoad="{{lazyload}}"
 />
