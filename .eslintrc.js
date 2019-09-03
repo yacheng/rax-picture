@@ -3,6 +3,7 @@ module.exports = {
   'globals': {
     "Component": true,
     "Page": true,
+    "App": true,
     "my": true,
   },
   'rules': {
@@ -13,7 +14,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "new-cap": ["error", {
       "newIsCap": true,
-      "capIsNewExceptions": ["Component", "Page"]
+      "capIsNewExceptions": ["Component", "Page", "App"]
     }],
   }
 };

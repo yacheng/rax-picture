@@ -5,6 +5,7 @@
     "jsx": "preserve",
     "jsxFactory": "createElement",
     "moduleResolution": "node",
+    "allowJs": true,
     "alwaysStrict": true,
     "sourceMap": false,
     "removeComments": false,
