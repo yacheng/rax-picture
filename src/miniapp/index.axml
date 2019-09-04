@@ -2,9 +2,9 @@
     style="{{style}}" 
     class="{{className}}"
     source="{{source}}"
-    onClick="{{onClick}}"
-    onError="{{onError}}"
-    onLoad="{{onLoad}}"
+    onClick="onClick"
+    onError="onError"
+    onLoad="onLoad"
     resizeMode="{{resizeMode}}"
     lazyLoad="{{lazyload}}"
 />
