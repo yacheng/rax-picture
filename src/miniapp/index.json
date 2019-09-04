@@ -1,3 +1,6 @@
 {
-    "component": true
+    "component": true,
+    "usingComponents": {
+        "rax-image":"rax-image/lib/miniapp/index"
+    }
 }

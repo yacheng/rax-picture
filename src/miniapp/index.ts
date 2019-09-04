@@ -1,21 +1,25 @@
-'use strict';
-import fmtEvent from './fmtEvent';
-
 Component({
-  data: {},
   props: {
-    className: '',
-    style: '',
+    className: "",
+    style: "",
     source: {
-      uri: ''
+      uri: ""
     },
-    onClick: function onClick() {}
+    resizeMode: "contain",
+    lazyload: false,
+    onClick: e => {},
+    onLoad: e => {},
+    onError: e => {}
   },
-  didMount: function didMount() {},
   methods: {
-    onClick: function onClick(e) {
-      var event = fmtEvent(this.props, e);
+    onClick(e) {
       this.props.onClick(event);
+    },
+    onLoad(e) {
+      this.props.onLoad(event);
+    },
+    onError(e) {
+      this.props.onError(event);
     }
   }
 });

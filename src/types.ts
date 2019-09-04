@@ -32,6 +32,8 @@ export interface PictureProps extends Rax.Attributes {
     width?: number;
   };
 
+  className?: string;
+
   /**
    * style, you must set style.width , you don't need to set style.height when the actual width and height of the image
    * are known, and let rax-pictrue calculate the true width of your image (required).

@@ -1,6 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { createElement, render } from 'rax';
 import DU from 'driver-universal';
-import Picture from '../src/index';
+import Picture from './miniapp/lib/index';
 
 const App = () => {
   return (
@@ -14,5 +15,5 @@ const App = () => {
       }}
     />
   );
-}
+};
 render(<App />, document.body, { driver: DU });

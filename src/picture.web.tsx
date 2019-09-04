@@ -130,7 +130,7 @@ function Picture(props) {
     url = uri;
   }
 
-  if (children || resizeMode) {
+  if (children) {
     return (
       <View
         {...nativeProps}

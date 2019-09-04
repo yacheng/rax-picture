@@ -1,15 +1,14 @@
 {
   "name": "rax-picture",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Picture component for Rax.",
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "clean": "rm -rf ./lib && rm -rf ./package-lock.json",
-    "build": "npm run clean && rax-scripts build --type 'component'",
-    "start": "rax-scripts start --type 'component' -p 8000",
-    "miniapp":"rax-scripts start --type 'component-miniapp'",
+    "clean": "rm -rf ./lib && rm -rf ./package-lock.json && rm -rf ./demo/miniapp/lib",
+    "build": "npm run clean && rax-scripts build",
+    "start": "rax-scripts start",
     "prepublishOnly": "npm run build",
     "test": "npm run build && rax-scripts test",
     "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ./src --fix"
@@ -37,7 +36,7 @@
     "main": "lib/miniapp/index"
   },
   "dependencies": {
-    "rax-image": "^1.0.3",
+    "rax-image": "^1.1.1",
     "rax-view": "^1.0.1",
     "universal-env": "^1.0.0"
   },
@@ -55,7 +54,8 @@
     "eslint": "^5.16.0",
     "eslint-config-rax": "^0.0.0",
     "rax": "^1.0.0",
-    "rax-scripts": "1.2.1",
+    "rax-plugin-component": "^0.1.9-0",
+    "rax-scripts": "^2.0.0",
     "rax-test-renderer": "^1.0.0"
   }
 }
