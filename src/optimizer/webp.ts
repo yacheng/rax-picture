@@ -2,11 +2,10 @@ const webpSuffix = '_.webp';
 const ossWebpSuffix = '.webp';
 
 /**
- * @param url
- * @param path
+ * @param {any} isOSSImg
  * @returns {String}
  */
-export default function(isOSSImg) {
+export default function(isOSSImg: any): string {
   if (isOSSImg) {
     return ossWebpSuffix;
   } else {

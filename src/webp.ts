@@ -7,18 +7,13 @@
 
 import { isWeex } from 'universal-env';
 
-let isIOS;
-let typeObj = {
-  lossy: 'UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA',
-  lossless: 'UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==',
-  alpha: 'UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==',
-  animation: 'UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA'
-};
-if (!isWeex) {
+
+let isIOS: boolean;
+if (!isWeex && !window.__isSSR) {
   isIOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 }
 
-function isSupportTest(callback, type) {
+function isSupportTest(callback: (isSupport: boolean) => void, type: string) {
   if ('function' !== typeof callback) return;
   let img = new Image;
   img.onload = function() {
@@ -31,23 +26,20 @@ function isSupportTest(callback, type) {
   };
 }
 
-function setLocalStorage(isSupport, type) {
+function setLocalStorage(isSupport: boolean, type: string) {
   if (window.localStorage && typeof window.localStorage.setItem === 'function') {
     try {
-      window.localStorage.setItem('webpsupport-' + type, isSupport);
+      window.localStorage.setItem('webpsupport-' + type, isSupport + '');
     } catch (e) {
     }
   }
 }
 
-function isSupport(callback, type) {
-  if (isWeex) {
-    return callback(true);
-  }
+export function isSupport(callback: (status: boolean) => void, type = 'lossy') {
   if ('function' === typeof callback) {
-    type = type || 'lossy';
-
-    if (window.navigator.userAgent.match(/windows|win32/i) || isIOS && window.navigator.userAgent.match(/UCBrowser/i)) {
+    if (isWeex || window.__isSSR) {
+      callback(true);
+    } else if (window.navigator.userAgent.match(/windows|win32/i) || isIOS && window.navigator.userAgent.match(/UCBrowser/i)) {
       callback(false);
     } else if (window.chrome || window.opera) {
       callback(true);
@@ -61,7 +53,3 @@ function isSupport(callback, type) {
     }
   }
 }
-
-let Webp = {};
-Webp.isSupport = isSupport;
-export default Webp;

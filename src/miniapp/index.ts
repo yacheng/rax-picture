@@ -1,11 +1,11 @@
 Component({
   props: {
-    className: "",
-    style: "",
+    className: '',
+    style: '',
     source: {
-      uri: ""
+      uri: ''
     },
-    resizeMode: "contain",
+    resizeMode: 'contain',
     lazyload: false,
     onClick: e => {},
     onLoad: e => {},

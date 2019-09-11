@@ -1,5 +1,11 @@
-import * as Rax from 'rax';
+import { RefAttributes, HTMLAttributes } from 'rax';
 
+declare global {
+  interface Window {
+    [key: string]: any;
+  }
+  type $TSFixMe = any;
+}
 /**
  * component:picture(图片)
  * document address(文档地址):
@@ -21,7 +27,7 @@ import * as Rax from 'rax';
  */
 export type PictureResizeMode = 'cover' | 'contain' | 'stretch';
 
-export interface PictureProps extends Rax.Attributes {
+export interface PictureProps extends RefAttributes<HTMLImageElement>, HTMLAttributes<HTMLImageElement> {
 
   /**
    * image source
