@@ -37,15 +37,6 @@ export interface PictureProps extends RefAttributes<HTMLImageElement>, HTMLAttri
     height?: number;
     width?: number;
   };
-
-  className?: string;
-
-  /**
-   * style, you must set style.width , you don't need to set style.height when the actual width and height of the image
-   * are known, and let rax-pictrue calculate the true width of your image (required).
-   */
-  style: Rax.CSSProperties;
-
   /**
    * decide how to adjust the size of the picture when the component size and picture size are out of proportion
    * default: stretch
