@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createElement, render } from 'rax';
 import DU from 'driver-universal';
-import Picture from './miniapp/lib/index';
+import Picture from '../src/index';
 
 const App = () => {
   return (

@@ -12,11 +12,11 @@ const filterDomains = [
 /**
  * use gw.alicdn.com
  *
- * @param url
- * @param host
+ * @param {String} url
+ * @param {String} host
  * @returns {String}
  */
-export default function(url, host) {
+export default function(url: string, host: string): string {
   const hostReg = host.match(ALI_HOST);
   if (hostReg && hostReg[0] != DEFAULT_HOSTNAME) {
     if (filterDomains.indexOf(host) === -1) {

@@ -1,38 +1,34 @@
-import {createElement, useState, memo} from 'rax';
+import { createElement, useState, memo } from 'rax';
 import View from 'rax-view';
 import Image from 'rax-image';
 import optimizer from './optimizer/index';
-import webp from './webp';
-
-const toString = {}.toString;
-const isArray = Array.isArray || function(arr) {
-  return toString.call(arr) == '[object Array]';
-};
+import { isSupport } from './webp';
+import { PictureProps } from './types';
 
 let isSupportJPG = false;
 let isSupportPNG = false;
 
-webp.isSupport((_isSupportJPG) => {
+isSupport(_isSupportJPG => {
   isSupportJPG = _isSupportJPG;
 });
 
-webp.isSupport((_isSupportPNG) => {
+isSupport(_isSupportPNG => {
   isSupportPNG = _isSupportPNG;
 }, 'alpha');
 
 /**
- * @param  {String|Array} suffix
- * @return {[type]}        [description]
+ * @param  {String|[String]} suffix
+ * @return {[String]}        [description]
  */
-function parseSuffix(suffix) {
-  const result = [];
-  let ret = [];
+function parseSuffix(suffix: string | string[]): string[] {
+  const result: string[] = [];
+  let ret: string[] = [];
 
   if (typeof suffix === 'string') {
     ret = suffix.split(',');
   }
 
-  if (isArray(suffix)) {
+  if (Array.isArray(suffix)) {
     ret = suffix;
   }
 
@@ -55,9 +51,10 @@ function getQualitySuffix(highQuality, suffix) {
   return highQuality ? _suffix[0] : _suffix[1];
 }
 
-function Picture(props) {
+function Picture(props: PictureProps) {
   let {
     children,
+    className,
     style = {},
     resizeMode,
     width,
@@ -78,33 +75,35 @@ function Picture(props) {
     lazyload = false,
     autoPixelRatio = true
   } = props;
-  let {uri} = source;
+  let { uri } = source;
   let nativeProps = props;
 
   const [visible, setVisible] = useState(false);
-
 
   let sWidth = style.width, // style width of picture
     sHeight = style.height; // style width of picture
 
   // according to the original height and width of the picture
   if (!sHeight && sWidth && width && height) {
-    const pScaling = width / parseInt(sWidth, 10);
+    const pScaling =
+      width / (typeof sWidth === 'string' ? parseInt(sWidth, 10) : sWidth);
     sHeight = parseInt(height / pScaling + '', 10);
   }
 
-  let newStyle = Object.assign({
-    height: sHeight
-  }, style);
-
+  let newStyle = Object.assign(
+    {
+      height: sHeight
+    },
+    style
+  );
 
   if (uri) {
-    if (autoPixelRatio && window.devicePixelRatio > 1) { // devicePixelRatio >= 2 for web
+    if (autoPixelRatio && window.devicePixelRatio > 1) {
+      // devicePixelRatio >= 2 for web
       if (typeof sWidth === 'string' && sWidth.indexOf('rem') > -1) {
         sWidth = parseInt(sWidth.split('rem')[0]) * 2 + 'rem';
       }
     }
-
     uri = optimizer(uri, {
       ignoreGif: ignoreGif,
       ignorePng: true,
@@ -112,7 +111,9 @@ function Picture(props) {
       replaceDomain: autoReplaceDomain,
       scalingWidth: autoScaling ? sWidth : 0,
       webp: autoWebp && (isSupportJPG && isSupportPNG),
-      compressSuffix: autoCompress ? getQualitySuffix(highQuality, compressSuffix) : ''
+      compressSuffix: autoCompress
+        ? getQualitySuffix(highQuality, compressSuffix)
+        : ''
     });
   }
 
@@ -134,38 +135,39 @@ function Picture(props) {
     return (
       <View
         {...nativeProps}
-        data-once={true}
+        className={className}
         style={{
           ...newStyle,
-          ...{
-            backgroundImage: 'url(' + url + ')',
-            backgroundSize: resizeMode || 'cover',
-            backgroundRepeat: 'no-repeat'
-          },
-          ...{
-            backgroundPosition: resizeMode === 'cover' || resizeMode === 'contain' ? 'center' : null
-          },
-          ...{
-            height: newStyle.height ? newStyle.height : defaultHeight
-          }
+          backgroundImage: 'url(' + url + ')',
+          backgroundSize: resizeMode || 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition:
+            resizeMode === 'cover' || resizeMode === 'contain'
+              ? 'center'
+              : null,
+          height: newStyle.height ? newStyle.height : defaultHeight
         }}
+        data-once={true}
       >
         {children}
       </View>
     );
   } else {
-    return <Image
-      {...nativeProps}
-      data-once={true}
-      source={{
-        uri: url
-      }}
-      style={newStyle}
-    />;
+    return (
+      <Image
+        {...nativeProps}
+        className={className}
+        style={newStyle}
+        data-once={true}
+        source={{
+          uri: url
+        }}
+      />
+    );
   }
 }
 
-function shouldComponentUpdate(preProps, nextProps,) {
+function shouldComponentUpdate(preProps: PictureProps) {
   return !!preProps.children;
 }
 

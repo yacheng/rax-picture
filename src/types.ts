@@ -1,5 +1,11 @@
-import * as Rax from 'rax';
+import { RefAttributes, HTMLAttributes } from 'rax';
 
+declare global {
+  interface Window {
+    [key: string]: any;
+  }
+  type $TSFixMe = any;
+}
 /**
  * component:picture(图片)
  * document address(文档地址):
@@ -21,7 +27,7 @@ import * as Rax from 'rax';
  */
 export type PictureResizeMode = 'cover' | 'contain' | 'stretch';
 
-export interface PictureProps extends Rax.Attributes {
+export interface PictureProps extends RefAttributes<HTMLImageElement>, HTMLAttributes<HTMLImageElement> {
 
   /**
    * image source
@@ -31,15 +37,6 @@ export interface PictureProps extends Rax.Attributes {
     height?: number;
     width?: number;
   };
-
-  className?: string;
-
-  /**
-   * style, you must set style.width , you don't need to set style.height when the actual width and height of the image
-   * are known, and let rax-pictrue calculate the true width of your image (required).
-   */
-  style: Rax.CSSProperties;
-
   /**
    * decide how to adjust the size of the picture when the component size and picture size are out of proportion
    * default: stretch

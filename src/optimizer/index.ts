@@ -41,7 +41,6 @@ export default function(uri, config) {
   let newUrl = uri;
   if (typeof uri === 'string') {
     let ret = isCdnImage(uri);
-
     // is cdn image
     if (ret) {
       const isOSSImg = isOSSImage(uri);

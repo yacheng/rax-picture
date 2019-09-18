@@ -1,7 +1,8 @@
 import { createElement, memo } from 'rax';
 import Image from 'rax-image';
+import { PictureProps } from './types';
 
-function Picture(props) {
+function Picture(props: PictureProps) {
   let {
     children,
     style = {},
@@ -16,7 +17,7 @@ function Picture(props) {
 
   // according to the original height and width of the picture
   if (!styleHeight && styleWidth && width && height) {
-    const pScaling = width / parseInt(styleWidth, 10);
+    const pScaling = width / (typeof styleWidth === 'string' ? parseInt(styleWidth, 10) : styleWidth);
     styleHeight = parseInt(height / pScaling + '', 10);
   }
 

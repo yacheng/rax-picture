@@ -1,7 +1,7 @@
 /**
- * @param url
+ * @param {String} url
  * @returns {String}
  */
-export default function(url) {
+export default function(url: string): string {
   return url.replace(/(http|https):/gi, '');
 }
