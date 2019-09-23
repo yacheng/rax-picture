@@ -6,15 +6,15 @@ import {
   useCallback,
   useEffect,
   memo
-} from "rax";
-import Image from "rax-image";
-import optimizer from "./optimizer";
-import { PictureProps } from "./types";
-import { getQualitySuffix } from "./uitl";
-import { isSupport } from "./webp";
+} from 'rax';
+import Image from 'rax-image';
+import optimizer from './optimizer';
+import { PictureProps } from './types';
+import { getQualitySuffix } from './uitl';
+import { isSupport } from './webp';
 
 export function isSupportWebP() {
-  return Promise.all([isSupport(), isSupport("alpha")]).then(result => {
+  return Promise.all([isSupport(), isSupport('alpha')]).then(result => {
     return result.every(r => r);
   });
 }
@@ -26,9 +26,9 @@ const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
       style,
       width,
       height,
-      resizeMode = "contain",
+      resizeMode = 'contain',
       source,
-      placeholder = "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==",
+      placeholder = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==',
       autoRemoveScheme = true,
       autoReplaceDomain = true,
       autoScaling = true,
@@ -36,7 +36,7 @@ const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
       ignoreGif = true,
       autoCompress = true,
       highQuality = true,
-      compressSuffix = ["Q75", "Q50"],
+      compressSuffix = ['Q75', 'Q50'],
       lazyload = false,
       autoPixelRatio = true
     } = props;
@@ -44,14 +44,14 @@ const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
     const [visible, setVisible] = useState(false);
     let { width: sWidth, height: sHeight } = style || {};
     if (!sHeight && sWidth && width && height) {
-      sHeight = parseInt(height / (width / parseInt(sWidth + "", 10)) + "", 10);
+      sHeight = parseInt(height / (width / parseInt(sWidth + '', 10)) + '', 10);
     }
     useEffect(() => {
       if (source.uri) {
         if (autoPixelRatio && window.devicePixelRatio > 1) {
           // devicePixelRatio >= 2 for web
-          if (typeof sWidth === "string" && sWidth.indexOf("rem") > -1) {
-            sWidth = parseInt(sWidth.split("rem")[0]) * 2 + "rem";
+          if (typeof sWidth === 'string' && sWidth.indexOf('rem') > -1) {
+            sWidth = parseInt(sWidth.split('rem')[0]) * 2 + 'rem';
           }
         }
         isSupportWebP().then(supported => {
@@ -61,11 +61,11 @@ const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
               ignorePng: true,
               removeScheme: autoRemoveScheme,
               replaceDomain: autoReplaceDomain,
-              scalingWidth: autoScaling ? parseInt(sWidth + "", 10) : 0,
+              scalingWidth: autoScaling ? parseInt(sWidth + '', 10) : 0,
               webp: autoWebp && supported,
               compressSuffix: autoCompress
                 ? getQualitySuffix(highQuality, compressSuffix)
-                : ""
+                : ''
             })
           );
           if (!lazyload && !visible) {

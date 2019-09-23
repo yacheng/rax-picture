@@ -1,4 +1,4 @@
-import { RefAttributes, HTMLAttributes } from "rax";
+import { RefAttributes, HTMLAttributes } from 'rax';
 
 declare global {
   interface Window {
@@ -24,11 +24,11 @@ declare global {
  *
  *  stretch:stretch the picture without maintaining the aspect ratio until the height is just enough to fill the container.
  */
-export type PictureResizeMode = "cover" | "contain" | "stretch";
+export type PictureResizeMode = 'cover' | 'contain' | 'stretch';
 
 export interface PictureProps
   extends RefAttributes<HTMLImageElement>,
-    HTMLAttributes<HTMLImageElement> {
+  HTMLAttributes<HTMLImageElement> {
   /**
    * image source
    */

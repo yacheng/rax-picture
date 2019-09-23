@@ -1,20 +1,20 @@
-import optimizer from "../optimizer";
-import { getQualitySuffix } from "../uitl";
+import optimizer from '../optimizer';
+import { getQualitySuffix } from '../uitl';
 
 const placeholder =
-  "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==";
+  'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==';
 
 Component({
   data: {
-    uri: ""
+    uri: ''
   },
   props: {
-    className: "",
-    style: "",
+    className: '',
+    style: '',
     source: {
-      uri: ""
+      uri: ''
     },
-    resizeMode: "contain",
+    resizeMode: 'contain',
     lazyload: false,
     placeholder: placeholder,
     autoRemoveScheme: true,
@@ -24,7 +24,7 @@ Component({
     ignoreGif: true,
     autoCompress: true,
     highQuality: true,
-    compressSuffix: ["Q75", "Q50"],
+    compressSuffix: ['Q75', 'Q50'],
     autoPixelRatio: true,
     onClick: e => {},
     onLoad: e => {},
@@ -34,7 +34,7 @@ Component({
     this.optimize();
   },
   didMount() {
-    if (!my.canIUse("component2")) {
+    if (!my.canIUse('component2')) {
       this.optimize();
     }
   },
@@ -58,11 +58,11 @@ Component({
           ignorePng: true,
           removeScheme: autoRemoveScheme,
           replaceDomain: autoReplaceDomain,
-          scalingWidth: autoScaling ? parseInt(sWidth + "", 10) : 0,
+          scalingWidth: autoScaling ? parseInt(sWidth + '', 10) : 0,
           webp: autoWebp,
           compressSuffix: autoCompress
             ? getQualitySuffix(highQuality, compressSuffix)
-            : ""
+            : ''
         })
       });
     },
