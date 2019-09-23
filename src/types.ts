@@ -1,4 +1,4 @@
-import { RefAttributes, HTMLAttributes } from 'rax';
+import { RefAttributes, HTMLAttributes } from "rax";
 
 declare global {
   interface Window {
@@ -12,7 +12,6 @@ declare global {
  * https://alibaba.github.io/rax/component/picture
  */
 
-
 /**
  * resizeMode available values (可用值)：
  *
@@ -25,17 +24,19 @@ declare global {
  *
  *  stretch:stretch the picture without maintaining the aspect ratio until the height is just enough to fill the container.
  */
-export type PictureResizeMode = 'cover' | 'contain' | 'stretch';
+export type PictureResizeMode = "cover" | "contain" | "stretch";
 
-export interface PictureProps extends RefAttributes<HTMLImageElement>, HTMLAttributes<HTMLImageElement> {
-
+export interface PictureProps
+  extends RefAttributes<HTMLImageElement>,
+    HTMLAttributes<HTMLImageElement> {
   /**
    * image source
    */
   source: {
     uri: string;
-    height?: number;
-    width?: number;
+  };
+  fallbackSource?: {
+    uri: string;
   };
   /**
    * decide how to adjust the size of the picture when the component size and picture size are out of proportion
@@ -124,6 +125,4 @@ export interface PictureProps extends RefAttributes<HTMLImageElement>, HTMLAttri
    * default: true
    */
   ignoreGif?: boolean;
-
-
 }

@@ -1,7 +1,7 @@
 <rax-image
     style="{{style}}" 
     class="{{className}}"
-    source="{{source}}"
+    source="{{{uri: uri}}}"
     onClick="onClick"
     onError="onError"
     onLoad="onLoad"

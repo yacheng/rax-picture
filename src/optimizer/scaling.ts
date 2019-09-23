@@ -1,8 +1,14 @@
-let isWeb = typeof window === 'object';
+import { isWeb, isMiniApp } from 'universal-env';
 
-let width = window.screen.width && window.screen.width;
-if (isWeb && !window.__isSSR) {
-  width = document.documentElement.clientWidth / 750 * width;
+let width = 0;
+if (isWeb) {
+  width = window.screen.width && window.screen.width;
+  if (!window.__isSSR) {
+    width = document.documentElement.clientWidth / 750 * width;
+  }
+} else if (isMiniApp) {
+  const systemInfo = my.getSystemInfoSync();
+  width = systemInfo.screenWidth;
 }
 
 const scalingWidth = [
