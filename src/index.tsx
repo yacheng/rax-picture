@@ -12,8 +12,9 @@ import optimizer from './optimizer';
 import { PictureProps } from './types';
 import { getQualitySuffix } from './uitl';
 import { isSupport } from './webp';
+import { isWeex } from 'universal-env';
 
-export function isSupportWebP() {
+function isSupportWebP() {
   return Promise.all([isSupport(), isSupport('alpha')]).then(result => {
     return result.every(r => r);
   });
@@ -46,32 +47,37 @@ const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
     if (!sHeight && sWidth && width && height) {
       sHeight = parseInt(height / (width / parseInt(sWidth + '', 10)) + '', 10);
     }
+
     useEffect(() => {
       if (source.uri) {
-        if (autoPixelRatio && window.devicePixelRatio > 1) {
-          // devicePixelRatio >= 2 for web
-          if (typeof sWidth === 'string' && sWidth.indexOf('rem') > -1) {
-            sWidth = parseInt(sWidth.split('rem')[0]) * 2 + 'rem';
-          }
+        if (isWeex && !lazyload && !visible) {
+          setVisible(true);
+        } else {
+          isSupportWebP().then(supported => {
+            if (autoPixelRatio && window.devicePixelRatio > 1) {
+              // devicePixelRatio >= 2 for web
+              if (typeof sWidth === 'string' && sWidth.indexOf('rem') > -1) {
+                sWidth = parseInt(sWidth.split('rem')[0]) * 2 + 'rem';
+              }
+            }
+            setUri(
+              optimizer(source.uri, {
+                ignoreGif: ignoreGif,
+                ignorePng: true,
+                removeScheme: autoRemoveScheme,
+                replaceDomain: autoReplaceDomain,
+                scalingWidth: autoScaling ? parseInt(sWidth + '', 10) : 0,
+                webp: autoWebp && supported,
+                compressSuffix: autoCompress
+                  ? getQualitySuffix(highQuality, compressSuffix)
+                  : ''
+              })
+            );
+            if (!lazyload && !visible) {
+              setVisible(true);
+            }
+          });
         }
-        isSupportWebP().then(supported => {
-          setUri(
-            optimizer(source.uri, {
-              ignoreGif: ignoreGif,
-              ignorePng: true,
-              removeScheme: autoRemoveScheme,
-              replaceDomain: autoReplaceDomain,
-              scalingWidth: autoScaling ? parseInt(sWidth + '', 10) : 0,
-              webp: autoWebp && supported,
-              compressSuffix: autoCompress
-                ? getQualitySuffix(highQuality, compressSuffix)
-                : ''
-            })
-          );
-          if (!lazyload && !visible) {
-            setVisible(true);
-          }
-        });
       }
     }, [source.uri]);
 
