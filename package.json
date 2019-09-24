@@ -36,7 +36,7 @@
     "main": "lib/miniapp/index"
   },
   "dependencies": {
-    "rax-image": "^1.1.2-1",
+    "rax-image": "^1.1.2",
     "universal-env": "^1.0.7"
   },
   "peerDependencies": {
@@ -56,7 +56,7 @@
     "husky": "^3.0.5",
     "lint-staged": "^9.3.0",
     "rax": "^1.0.0",
-    "rax-plugin-component": "^0.1.9-0",
+    "rax-plugin-component": "^0.1.9",
     "rax-scripts": "^2.0.0",
     "rax-scrollview": "^1.1.0-8",
     "rax-test-renderer": "^1.0.0",
