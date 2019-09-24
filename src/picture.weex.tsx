@@ -1,47 +1,63 @@
-import { createElement, memo } from 'rax';
+import {
+  createElement,
+  memo,
+  forwardRef,
+  ForwardRefExoticComponent
+} from 'rax';
 import Image from 'rax-image';
 import { PictureProps } from './types';
 
-function Picture(props: PictureProps) {
-  let {
-    children,
-    style = {},
-    source = {},
-    resizeMode,
-    width,
-    height,
-    defaultHeight
-  } = props;
-  let styleWidth = style.width; // style width of picture
-  let styleHeight = style.height; // style width of picture
+const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
+  (props, ref) => {
+    let {
+      children,
+      style = {},
+      source = {},
+      resizeMode,
+      width,
+      height,
+      defaultHeight
+    } = props;
+    let styleWidth = style.width; // style width of picture
+    let styleHeight = style.height; // style width of picture
 
-  // according to the original height and width of the picture
-  if (!styleHeight && styleWidth && width && height) {
-    const pScaling = width / (typeof styleWidth === 'string' ? parseInt(styleWidth, 10) : styleWidth);
-    styleHeight = parseInt(height / pScaling + '', 10);
-  }
-
-  if (!styleHeight) {
-    styleHeight = defaultHeight;
-
-    if (!resizeMode) {
-      // ensure that the picture can be displayed
-      resizeMode = 'contain';
+    // according to the original height and width of the picture
+    if (!styleHeight && styleWidth && width && height) {
+      const pScaling =
+        width /
+        (typeof styleWidth === 'string'
+          ? parseInt(styleWidth, 10)
+          : styleWidth);
+      styleHeight = parseInt(height / pScaling + '', 10);
     }
+
+    if (!styleHeight) {
+      styleHeight = defaultHeight;
+
+      if (!resizeMode) {
+        // ensure that the picture can be displayed
+        resizeMode = 'contain';
+      }
+    }
+
+    let newStyle = Object.assign(
+      {
+        height: styleHeight
+      },
+      style
+    );
+
+    if (resizeMode) {
+      newStyle.resizeMode = resizeMode;
+    }
+
+    return (
+      <Image {...this.props} ref={ref} source={source} style={newStyle}>
+        {children}
+      </Image>
+    );
   }
-
-  let newStyle = Object.assign({
-    height: styleHeight
-  }, style);
-
-  if (resizeMode) {
-    newStyle.resizeMode = resizeMode;
-  }
-
-  return <Image {...this.props} source={source} style={newStyle}>
-    {children}
-  </Image>;
-}
+);
 
 function shouldComponentUpdate(preProps, nextProps) {
   if (preProps.forceUpdate || preProps.children) {
