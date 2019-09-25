@@ -66,18 +66,20 @@ function find(c: number, arr: number[]) {
 export default function(sWidth: string | number, isOSSImg: any): string {
   let xWidth = 0;
   let scaling = 1;
-  if (typeof sWidth === 'string') {
-    if (sWidth.indexOf('rem') > -1) {
-      // isRem
+  if (width) {
+    if (typeof sWidth === 'string') {
+      // process rem & rpx
       xWidth = parseFloat(sWidth);
-      if (width) {
+      if (sWidth.indexOf('rem') > -1 || sWidth.indexOf('rpx') > -1) {
         scaling = visualStandard / width;
       }
+    } else {
+      // isNum
+      xWidth = sWidth;
+      scaling = visualStandard / width;
     }
-  } else {
-    // isNum
-    xWidth = sWidth;
   }
+
   const newWidth = find(Math.floor(xWidth / scaling), scalingWidth);
   return newWidth ? isOSSImg ? `_${newWidth}w` : `${newWidth}x10000` : '';
 }

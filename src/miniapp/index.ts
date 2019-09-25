@@ -49,20 +49,27 @@ Component({
         autoCompress,
         highQuality,
         compressSuffix,
-        source
+        source,
+        style
       } = this.props;
       let sWidth = 0;
+      const styleArr = style.replace(/\s*/g, '').split(';');
+      for (let i = 0; i < styleArr.length; i++) {
+        const [key, val] = styleArr[i].split(':');
+        if (key === 'width') {
+          sWidth = val;
+          break;
+        }
+      }
       this.setData({
         uri: optimizer(source.uri, {
           ignoreGif: ignoreGif,
           ignorePng: true,
           removeScheme: autoRemoveScheme,
           replaceDomain: autoReplaceDomain,
-          scalingWidth: autoScaling ? parseInt(sWidth + '', 10) : 0,
+          scalingWidth: autoScaling ? sWidth : 0,
           webp: autoWebp,
-          compressSuffix: autoCompress
-            ? getQualitySuffix(highQuality, compressSuffix)
-            : ''
+          compressSuffix: autoCompress ? getQualitySuffix(highQuality, compressSuffix) : ''
         })
       });
     },

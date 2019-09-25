@@ -9,7 +9,7 @@ import compress from './compress';
 const REG_IMG_SUFFIX = /_(\d+x\d+|cy\d+i\d+|sum|m|b)?(xz|xc)?((?:q\d+)?(?:s\d+)?)(\.jpg)?(_\.webp)?$/i;
 
 export interface OptimizerConfig {
-  scalingWidth?: number;
+  scalingWidth?: number | string;
   webp?: boolean;
   compressSuffix?: string;
   quality?: string;
@@ -58,10 +58,8 @@ export default function(uri: string, config: OptimizerConfig) {
       const host = ret[1];
       const path = ret[2];
       let suffixRet = path.match(REG_IMG_SUFFIX) || [];
-      const notGif =
-        !~path.indexOf('gif') && !~path.indexOf('GIF') || !ignoreGif;
-      const notPng =
-        !~path.indexOf('png') && !~path.indexOf('png') || !ignorePng;
+      const notGif = !~path.indexOf('gif') && !~path.indexOf('GIF') || !ignoreGif;
+      const notPng = !~path.indexOf('png') && !~path.indexOf('png') || !ignorePng;
 
       let scalingSuffix = suffixRet[1] || '';
       if (scalingWidth && notGif) {
@@ -76,14 +74,11 @@ export default function(uri: string, config: OptimizerConfig) {
 
       let _compressSuffix = suffixRet[3] || '';
       if ((compressSuffix || quality || acutance) && notGif && notPng) {
-        _compressSuffix =
-          compress(compressSuffix, quality, acutance, isOSSImg) ||
-          _compressSuffix;
+        _compressSuffix = compress(compressSuffix, quality, acutance, isOSSImg) || _compressSuffix;
       }
 
       let cut = scalingSuffix ? suffixRet[2] || '' : '';
-      let suffix =
-        scalingSuffix || _compressSuffix ? suffixRet[4] || '.jpg' : '';
+      let suffix = scalingSuffix || _compressSuffix ? suffixRet[4] || '.jpg' : '';
       let prev = scalingSuffix || _compressSuffix ? '_' : '';
       if (isOSSImg) {
         if (prev == '_') {
@@ -102,8 +97,7 @@ export default function(uri: string, config: OptimizerConfig) {
         if (isOSSImg) {
           newUrl += prev + scalingSuffix + cut + _compressSuffix + webpSuffix;
         } else {
-          newUrl +=
-            prev + scalingSuffix + cut + _compressSuffix + suffix + webpSuffix;
+          newUrl += prev + scalingSuffix + cut + _compressSuffix + suffix + webpSuffix;
         }
 
         if (removeScheme) {
