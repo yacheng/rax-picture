@@ -129,6 +129,9 @@ const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
     }
 
     let url = placeholder;
+    if (window.__isHydrating || window.__isSSR || props.isHydrating || props.isSSR) {
+      lazyload = false;
+    }
     if (lazyload) {
       nativeProps.onAppear = () => setVisible(true);
       if (visible) {
