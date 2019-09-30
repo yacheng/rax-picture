@@ -3,9 +3,9 @@ import {
   memo,
   forwardRef,
   ForwardRefExoticComponent
-} from "rax";
-import Image from "rax-image";
-import { PictureProps } from "./types";
+} from 'rax';
+import Image from 'rax-image';
+import { PictureProps } from './types';
 
 const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
   (props, ref) => {
@@ -26,10 +26,10 @@ const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
     if (!styleHeight && styleWidth && width && height) {
       const pScaling =
         width /
-        (typeof styleWidth === "string"
+        (typeof styleWidth === 'string'
           ? parseInt(styleWidth, 10)
           : styleWidth);
-      styleHeight = parseInt(height / pScaling + "", 10);
+      styleHeight = parseInt(height / pScaling + '', 10);
     }
 
     if (!styleHeight) {
@@ -37,7 +37,7 @@ const Picture: ForwardRefExoticComponent<PictureProps> = forwardRef(
 
       if (!resizeMode) {
         // ensure that the picture can be displayed
-        resizeMode = "contain";
+        resizeMode = 'contain';
       }
     }
 
