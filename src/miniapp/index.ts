@@ -13,13 +13,13 @@ Component({
   },
   methods: {
     onClick(e) {
-      this.props.onClick(event);
+      this.props.onClick(e);
     },
     onLoad(e) {
-      this.props.onLoad(event);
+      this.props.onLoad(e);
     },
     onError(e) {
-      this.props.onError(event);
+      this.props.onError(e);
     }
   }
 });
