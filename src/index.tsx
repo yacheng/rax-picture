@@ -1,8 +1,8 @@
-import { createElement, forwardRef, Ref } from 'rax';
-import { isWeex } from 'universal-env';
-import { PictureProps } from './types';
-import PicWeex from './picture.weex';
-import PicWeb from './picture.web';
+import { createElement, forwardRef, Ref } from "rax";
+import { isWeex } from "universal-env";
+import { PictureProps } from "./types";
+import PicWeex from "./pictureWeex";
+import PicWeb from "./pictureWeb";
 
 export default forwardRef((props: PictureProps, ref: Ref<HTMLImageElement>) => {
   if (isWeex) {
